@@ -193,4 +193,188 @@ func main() {
 	var fruits4 = make([]string, 3)
 	_ = fruits4
 	fmt.Printf("%#v", fruits4)
+
+	// Contoh 3
+	var fruits5 = make([]string, 3)
+	_ = fruits5
+
+	fruits5[0] = "apple"
+	fruits5[1] = "banana"
+	fruits5[2] = "mango"
+
+	fmt.Printf("%#v", fruits5)
+
+	// Contoh 4
+	var fruits6 = make([]string, 3)
+	fruits6 = append(fruits6, "apple", "banana", "mango")
+	fmt.Printf("%#v", fruits6)
+
+	// Contoh 5
+	var fruits7 = []string{"apple", "banana", "mango"}
+	var fruits8 = []string{"durian", "pineapple", "starfruit"}
+	fruits7 = append(fruits7, fruits8...)
+	fmt.Printf("%#v", fruits7)
+
+	// Contoh 6
+	var fruits9 = []string{"apple", "banana", "mango"}
+	var fruits10 = []string{"durian", "pineapple", "starfruit"}
+	fruits11 := copy(fruits9, fruits10)
+	fmt.Println("Fruits 9 =>", fruits9)
+	fmt.Println("Fruits 10 =>", fruits10)
+	fmt.Println("Copied elements =>", fruits11)
+
+	// Contoh 7
+	var fruits12 = []string{"apple", "banana", "mango", "durian", "pineapple"}
+
+	var fruits13 = fruits12[1:4]
+	fmt.Printf("%#v\n", fruits13)
+
+	var fruits14 = fruits12[0:]
+	fmt.Printf("%#v\n", fruits14)
+
+	var fruits15 = fruits12[:3]
+	fmt.Printf("%#v\n", fruits15)
+
+	var fruits16 = fruits12[:] // sama dengan fruits12[:len(fruits12)]
+	fmt.Printf("%#v\n", fruits16)
+
+	// Contoh 8
+	var fruits17 = []string{"apple", "banana", "mango", "durian", "pineapple"}
+	fruits17 = append(fruits17[:3], "rambutan")
+	fmt.Printf("%#v\n", fruits17)
+
+	// Contoh 9
+	var fruits18 = []string{"apple", "banana", "mango", "durian", "pineapple"}
+	var fruits19 = fruits18[2:4]
+	fruits19[0] = "rambutan"
+	fmt.Println("fruits18 => ", fruits18)
+	fmt.Println("fruits19 => ", fruits19)
+
+	// Contoh 10
+	var fruits20 = []string{"apple", "mango", "durian", "mango"}
+	fmt.Println("Fruits20 cap:", cap(fruits20)) // 4
+	fmt.Println("Fruits20 len:", len(fruits20)) // 4
+	fmt.Println(strings.Repeat("#", 20))
+
+	var fruits21 = fruits20[0:3]
+
+	fmt.Println("Fruits21 cap:", cap(fruits21)) // 4
+	fmt.Println("Fruits21 len:", len(fruits21)) // 3
+	fmt.Println(strings.Repeat("#", 20))
+
+	var fruits22 = fruits20[1:]
+
+	fmt.Println("Fruits22 cap:", cap(fruits22)) // 3
+	fmt.Println("Fruits22 len:", len(fruits22)) // 3
+
+	// Contoh 11
+	cars := []string{"Ford", "Honda", "Audi", "Range Rover"}
+	newCars := []string{}
+
+	newCars = append(newCars, cars[0:2]...)
+
+	cars[0] = "Nissan"
+	fmt.Println("cars:", cars)
+	fmt.Println("newCars:", newCars)
+
+	// 6. Map
+	// Contoh 1
+	var person map[string]string // Deklarasi
+	person = map[string]string{} // Inisialisasi
+
+	person["name"] = "Airell"
+	person["age"] = "23"
+	person["address"] = "Jalan Sudirman"
+
+	fmt.Println("name:", person["name"])
+	fmt.Println("age:", person["age"])
+	fmt.Println("address:", person["address"])
+
+	// Contoh 2
+	var person2 = map[string]string{
+		"name":    "Airell",
+		"age":     "23",
+		"address": "Jalan Sudirman",
+	}
+
+	fmt.Println("name:", person2["name"])
+	fmt.Println("age:", person2["age"])
+	fmt.Println("address:", person2["address"])
+
+	// Contoh 3
+	var person3 = map[string]string{
+		"name":    "Airell",
+		"age":     "23",
+		"address": "Jalan Sudirman",
+	}
+
+	for key, value := range person3 {
+		fmt.Println(key, ":", value)
+	}
+
+	// Contoh 4
+	var person4 = map[string]string{
+		"name":    "Airell",
+		"age":     "23",
+		"address": "Jalan Sudirman",
+	}
+
+	fmt.Println("Before deleting:", person4)
+
+	delete(person4, "age")
+
+	fmt.Println("After deleting:", person4)
+
+	// Contoh 5
+	var person5 = map[string]string{
+		"name":    "Airell",
+		"age":     "23",
+		"address": "Jalan Sudirman",
+	}
+
+	value, exist := person5["age"]
+
+	if exist {
+		fmt.Println(value)
+	} else {
+		fmt.Println("Value does'nt exist")
+	}
+
+	delete(person5, "age")
+
+	value, exist = person5["age"]
+
+	if exist {
+		fmt.Println(value)
+	} else {
+		fmt.Println("Value does'nt exist")
+	}
+
+	// Contoh 6
+	var people = []map[string]string{
+		{"name": "Airell", "age": "23"},
+		{"name": "Nanda", "age": "23"},
+		{"name": "Mailo", "age": "15"},
+	}
+
+	for i, person := range people {
+		fmt.Printf("Index: %d, name: %s, age: %s\n", i, person["name"], person["age"])
+	}
+
+	// 7. Aliase
+	// Contoh 1
+	// deklarasi variable dengan tipe data uint8
+	var a uint8 = 10
+	var b byte // byte adala alias dari tipe data uint8
+
+	b = a // no error, karena byte memiliki data yang sama dengan uint8
+	_ = b
+
+	// Contoh 2
+	// Mendeklarasi tipe data alias bernama second
+	// type nama_alias = nama_tipe_data
+	type second = uint
+
+	var hour second = 3600
+	fmt.Printf("hour type: %T\n", hour) // => hour type: uint
 }
