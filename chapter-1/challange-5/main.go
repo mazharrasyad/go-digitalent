@@ -2,41 +2,53 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"sync"
+	"time"
 )
 
+var mutex sync.Mutex
+
 func main() {
+	data1 := []string{"bisa1", "bisa2", "bisa3"}
+	data2 := []string{"coba1", "coba2", "coba3"}
+
 	var wg sync.WaitGroup
-	var mu sync.Mutex
+	wg.Add(2)
 
-	data1 := []interface{}{"bisa1", "bisa2", "bisa3"}
-	data2 := []interface{}{"coba1", "coba2", "coba3"}
-
-	for i := 0; i < 4; i++ {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-
-			mu.Lock()
-			defer mu.Unlock()
-
-			for j := 0; j < 2; j++ {
-				fmt.Println(data1, j+1)
-			}
-		}()
-
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-
-			mu.Lock()
-			defer mu.Unlock()
-
-			for j := 0; j < 2; j++ {
-				fmt.Println(data2, j+1)
-			}
-		}()
-	}
+	fmt.Println("===== Secara Acak =====")
+	go printRandom(data1, &wg)
+	go printRandom(data2, &wg)
 
 	wg.Wait()
+
+	fmt.Println("\n===== Secara Rapih =====")
+	wg.Add(2)
+
+	go printMutex(data1, &wg)
+	go printMutex(data2, &wg)
+
+	wg.Wait()
+}
+
+func printRandom(data interface{}, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	rand.Seed(time.Now().UnixNano())
+
+	for i := 1; i <= 4; i++ {
+		fmt.Printf("%s %d\n", data, rand.Intn(3)+1)
+		time.Sleep(time.Millisecond * 500)
+	}
+}
+
+func printMutex(data interface{}, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	for i := 1; i <= 4; i++ {
+		mutex.Lock()
+		fmt.Printf("%s %d\n", data, i)
+		mutex.Unlock()
+		time.Sleep(time.Millisecond * 500)
+	}
 }
