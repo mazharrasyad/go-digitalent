@@ -2,3 +2,4 @@ go 1.20
 
 use ./chapter-1/sesi-3
 use ./chapter-2/sesi-2
+use ./chapter-2/challange-5
