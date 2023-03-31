@@ -1,0 +1,121 @@
+basePath: /
+definitions:
+  models.Car:
+    properties:
+      brand:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: integer
+      model:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: admin@mail.me
+    name: API Support
+  description: Service to manage car data
+  termsOfService: https://google.com
+  title: Car API
+  version: "1.0"
+paths:
+  /cars:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all cars data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Car'
+      summary: Get all cars
+      tags:
+      - json
+    post:
+      consumes:
+      - application/json
+      description: Create new car
+      parameters:
+      - description: Create car
+        in: body
+        name: models.Car
+        required: true
+        schema:
+          $ref: '#/definitions/models.Car'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Car'
+      summary: Create car
+      tags:
+      - json
+  /cars/{Id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete car data
+      parameters:
+      - description: ID of the car
+        in: path
+        name: Id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete car
+      tags:
+      - json
+    get:
+      consumes:
+      - application/json
+      description: Get details of specific car
+      parameters:
+      - description: ID of the car
+        in: path
+        name: Id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Car'
+      summary: Get car by car id
+      tags:
+      - json
+    patch:
+      consumes:
+      - application/json
+      description: Update car data
+      parameters:
+      - description: ID of the car
+        in: path
+        name: Id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Car'
+      summary: Update car
+      tags:
+      - json
+swagger: "2.0"

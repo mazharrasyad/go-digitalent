@@ -1,0 +1,183 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Service to manage car data",
+        "title": "Car API",
+        "termsOfService": "https://google.com",
+        "contact": {
+            "name": "API Support",
+            "email": "admin@mail.me"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths": {
+        "/cars": {
+            "get": {
+                "description": "Get details of all cars data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "json"
+                ],
+                "summary": "Get all cars",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Car"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create new car",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "json"
+                ],
+                "summary": "Create car",
+                "parameters": [
+                    {
+                        "description": "Create car",
+                        "name": "models.Car",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Car"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Car"
+                        }
+                    }
+                }
+            }
+        },
+        "/cars/{Id}": {
+            "get": {
+                "description": "Get details of specific car",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "json"
+                ],
+                "summary": "Get car by car id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the car",
+                        "name": "Id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Car"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete car data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "json"
+                ],
+                "summary": "Delete car",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the car",
+                        "name": "Id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update car data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "json"
+                ],
+                "summary": "Update car",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the car",
+                        "name": "Id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Car"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Car": {
+            "type": "object",
+            "properties": {
+                "brand": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
