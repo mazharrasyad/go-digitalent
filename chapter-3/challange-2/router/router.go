@@ -13,16 +13,16 @@ func StartApp() *gin.Engine {
 	userRouter := r.Group("/users")
 	{
 		userRouter.POST("/register", controllers.UserRegister)
-
 		userRouter.POST("/login", controllers.UserLogin)
 	}
 
 	productRouter := r.Group("/products")
 	{
 		productRouter.Use(middlewares.Authentication())
-		productRouter.POST("/", controllers.CreateProduct)
-
+		productRouter.POST("/", middlewares.ProductAuthorization(), controllers.CreateProduct)
+		productRouter.GET("/:productId", middlewares.ProductAuthorization(), controllers.ReadProduct)
 		productRouter.PUT("/:productId", middlewares.ProductAuthorization(), controllers.UpdateProduct)
+		productRouter.DELETE("/:productId", middlewares.ProductAuthorization(), controllers.DeleteProduct)
 	}
 
 	return r
